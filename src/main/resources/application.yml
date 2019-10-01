@@ -1,0 +1,14 @@
+spring:
+    jpa:
+      database-platform: org.hibernate.dialect.MySQLDialect
+    datasource:
+      url: jdbc:mysql://localhost:3306/ram?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      username: root
+      password: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+    file: c:/data/project_manager.log
+
+server:
+    port: 8020

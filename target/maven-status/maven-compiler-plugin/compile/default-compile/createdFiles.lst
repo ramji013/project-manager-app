@@ -1,0 +1,14 @@
+com\project\manager\entity\Task.class
+com\project\manager\bean\response\ViewUser.class
+com\project\manager\service\UserService.class
+com\project\manager\entity\ParentTask.class
+com\project\manager\repository\UserRepository.class
+com\project\manager\bean\request\AddUser.class
+com\project\manager\bean\response\ViewTask.class
+com\project\manager\bean\request\AddProject.class
+com\project\manager\service\impl\UserServiceImpl.class
+com\project\manager\entity\User$UserBuilder.class
+com\project\manager\entity\User.class
+com\project\manager\bean\request\AddTask.class
+com\project\manager\bean\response\ViewProject.class
+com\project\manager\entity\Project.class
