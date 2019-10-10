@@ -17,20 +17,45 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
 
     @Override
-    public boolean createUserData(AddUser user) {
-        //User userBean = User.;
-        //user.ge
-        //user
+    public boolean createUser(AddUser user) {
+        try {
+            User userBean = new User();
+            userBean.setEmployeeId(user.getEmployeeId());
+            userBean.setFirstName(user.getFirstName());
+            userBean.setLastName(user.getLastName());
+            userRepository.save(userBean);
+            return true;
+        }catch (Exception exp){
+            exp.printStackTrace();
+        }
         return false;
     }
 
     @Override
-    public boolean updateUserData(AddUser user) {
+    public boolean updateUser(AddUser user) {
+        User userData = userRepository.getUserByEmployeeId(user.getEmployeeId());
+        if(userData!=null) {
+            userData.setFirstName(user.getFirstName());
+            userData.setLastName(user.getLastName());
+            userRepository.save(userData);
+            return true;
+        }
         return false;
     }
 
     @Override
-    public List<ViewUser> getAllUser() {
-        return null;
+    public List<User> getAllUser() {
+        return (List<User>)userRepository.getAllActiveUser();
+}
+
+    @Override
+    public boolean deleteUser(String employeeId) {
+        try {
+            userRepository.deleteEmployee(employeeId);
+            return true;
+        }catch (Exception exp){
+            return false;
+        }
+
     }
 }
