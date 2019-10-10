@@ -10,5 +10,5 @@ public class AddProject {
     private String startDate;
     private String endDate;
     private int priority;
-    private String manager;
+    private int employeeId;
 }

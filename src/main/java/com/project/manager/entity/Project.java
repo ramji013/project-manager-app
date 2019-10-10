@@ -19,13 +19,5 @@ public class Project implements Serializable {
     private Date startDate;
     private Date endDate;
     private int priority;
-
-    public Project (int projectId, String project, Date startDate, Date endDate, int priority){
-        if(projectId!=0)
-            this.projectId = projectId;
-        this.project = project;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.priority = priority;
-    }
+    private int employeeId;
 }
