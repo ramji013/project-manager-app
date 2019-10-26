@@ -8,10 +8,12 @@ import java.util.Date;
 @Getter @Setter
 public class ViewProject {
     private int projectId;
-    private String project;
+    private String projectName;
     private int noOfTask;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String taskStatus;
     private int priority;
+    private int completed;
+    private int managerId;
 }

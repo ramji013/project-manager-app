@@ -1,7 +1,7 @@
 package com.project.manager.controller;
 
 import com.project.manager.bean.request.AddProject;
-import com.project.manager.entity.Project;
+import com.project.manager.bean.response.ViewProject;
 import com.project.manager.service.ProjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -48,7 +48,7 @@ public class ProjectController {
 
     @GetMapping
     public ResponseEntity getAllProject() {
-        List<Project> projectLst = projectService.getAllProject();
+        List<ViewProject> projectLst = projectService.getAllProject();
         if(projectLst!=null)
             return new ResponseEntity<>(projectLst, HttpStatus.OK);
         else

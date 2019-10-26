@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter @Setter
 public class AddProject {
     private int projectId;
-    private String project;
+    private String projectName;
     private String startDate;
     private String endDate;
     private int priority;
-    private int employeeId;
+    private int managerId;
 }
