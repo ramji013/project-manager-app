@@ -1,17 +1,19 @@
 package com.project.manager.bean.request;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
 public class AddTask {
-
-    private String project;
+    private String projectName;
     private String projectId;
-    private String task;
-    private boolean isParenetTask;
+    private String taskName;
+    @JsonProperty("isParentTask")
+    private boolean isParentTask;
     private String priority;
-    private String parentTask;
+    private String parentTaskId;
     private String startDate;
     private String endDate;
+    private String userId;
 }

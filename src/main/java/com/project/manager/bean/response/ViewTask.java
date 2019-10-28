@@ -4,14 +4,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter @Setter
 public class ViewTask {
-    private String taskId;
-    private String task;
+    private List<Task> task;
     private String parentTask;
     private String parentTaskId;
-    private int priority;
-    private Date startDate;
-    private Date endDate;
 }

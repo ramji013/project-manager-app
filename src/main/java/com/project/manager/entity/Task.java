@@ -12,9 +12,11 @@ import java.util.Date;
 public class Task implements Serializable {
     @Id
     private int taskId;
-    private int parentId;
+    @ManyToOne
+    @JoinColumn(name= "parent_id", referencedColumnName = "id")
+    private ParentTask parentId;
     @Column(name="project_id")
-    private int projectId;
+    private String projectId;
     private String task;
     private Date startDate;
     private Date endDate;

@@ -14,7 +14,7 @@ import java.util.List;
 public class Project implements Serializable {
     @Id
     @Column(name = "project_id")
-    private int projectId;
+    private String projectId;
     @Column(name="project_name")
     private String projectName;
     private Date startDate;

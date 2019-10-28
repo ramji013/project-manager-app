@@ -6,21 +6,24 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 @Entity @Getter @Setter @NoArgsConstructor
 public class ParentTask implements Serializable{
-    @Column(name="parent_id")
-    @Id
-    private int parentId;
-    private String task;
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="parentId")
-    private Task taskDetail;
 
-    public ParentTask (int parentId, String task){
-        if(parentId!=0)
-            this.parentId = parentId;
-        this.task = task;
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name="parent_task",updatable = false, nullable = false)
+    private String parentTask;
+    @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL ,mappedBy="parentId")
+    private List<Task> taskDetail;
+
+//    public ParentTask (int parentId, String task){
+//        if(parentId!=0)
+//            this.parentId = parentId;
+//        this.task = task;
+//    }
 
 }
