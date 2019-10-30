@@ -17,8 +17,11 @@ public class ProjectManagerUtility {
     }
 
     public static String date2String(Date date){
-        String pattern = "yyyy-MM-dd";
-        DateFormat df = new SimpleDateFormat(pattern);
-        return df.format(date);
+        if(date!=null) {
+            String pattern = "yyyy-MM-dd";
+            DateFormat df = new SimpleDateFormat(pattern);
+            return df.format(date);
+        }
+        return "";
     }
 }

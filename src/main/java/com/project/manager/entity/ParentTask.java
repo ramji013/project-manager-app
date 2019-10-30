@@ -20,7 +20,7 @@ public class ParentTask implements Serializable{
     @OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL ,mappedBy="parentId")
     private List<Task> taskDetail;
 
-//    public ParentTask (int parentId, String task){
+//    public ViewParentTask (int parentId, String task){
 //        if(parentId!=0)
 //            this.parentId = parentId;
 //        this.task = task;

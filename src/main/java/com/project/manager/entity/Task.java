@@ -20,8 +20,11 @@ public class Task implements Serializable {
     private String task;
     private Date startDate;
     private Date endDate;
-    private int priority;
+    private String priority;
     private String status;
+    @Column(name="user_id")
+    private String userId;
+
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumns({
             @JoinColumn(name="project_id", referencedColumnName="project_id", insertable = false, updatable = false)
