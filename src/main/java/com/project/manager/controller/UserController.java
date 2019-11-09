@@ -47,4 +47,8 @@ public class UserController {
         else
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public void setUserService(UserService userService){
+        this.userService = userService;
+    }
 }

@@ -24,6 +24,8 @@ public class Task implements Serializable {
     private String status;
     @Column(name="user_id")
     private String userId;
+    @Column(name="is_completed")
+    private String isCompleted;
 
     @ManyToOne(fetch= FetchType.EAGER)
     @JoinColumns({
@@ -31,15 +33,4 @@ public class Task implements Serializable {
     })
     private Project project;
 
-   /* public Task(int taskId, int parentId, int projectId, String task, Date startDate, Date endDate, int priority, String status){
-        if(taskId!=0)
-            this.taskId = taskId;
-        this.parentId = parentId;
-        this.projectId = projectId;
-        this.task = task;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.priority = priority;
-        this.status = status;
-    }*/
 }

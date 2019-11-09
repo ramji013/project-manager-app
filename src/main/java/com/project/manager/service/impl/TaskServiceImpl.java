@@ -27,34 +27,24 @@ public class TaskServiceImpl implements TaskService{
     private TaskRepository taskRepository;
 
     @Override
-    public boolean updateTask(AddTask task) {
-        return false;
+    public boolean updateTask(AddTask updateTask) {
+
+        Task task = taskRepository.findByTaskId(updateTask.getTaskId());
+        task.setParentId(task.getParentId());
+        task.setProjectId(updateTask.getProjectId());
+        task.setStartDate(ProjectManagerUtility.str2Date(updateTask.getStartDate()));
+        task.setEndDate(ProjectManagerUtility.str2Date(updateTask.getEndDate()));
+        task.setPriority(updateTask.getPriority());
+        task.setUserId(updateTask.getUserId());
+        taskRepository.save(task);
+        return true;
     }
 
-    @Override
-    public List<ViewTask> getAllTask() {
-        List<Task> taskList = taskRepository.findAll();
-        ViewTask viewTask = new ViewTask();
-        List<ViewTask> viewTaskList = new ArrayList<>();
-        for(Task task: taskList){
-            if("Y".equalsIgnoreCase(task.getStatus())) {
-                viewTask = new ViewTask();
-                viewTask.setParentTaskId(task.getParentId().getId());
-                viewTask.setParentTaskName(task.getParentId().getParentTask());
-                viewTask.setProjectId(task.getProjectId());
-                viewTask.setTaskName(task.getTask());
-                viewTask.setPriority(task.getPriority());
-                viewTask.setStartDate(ProjectManagerUtility.date2String(task.getStartDate()));
-                viewTask.setEndDate(ProjectManagerUtility.date2String(task.getEndDate()));
-                viewTaskList.add(viewTask);
-            }
-        }
-        return viewTaskList;
-    }
 
     @Override
     public boolean completeTask(String taskId) {
-        return false;
+        taskRepository.completeTask(taskId);
+        return true;
     }
 
     @Override
@@ -68,7 +58,6 @@ public class TaskServiceImpl implements TaskService{
                 task.setTask(createTask.getTaskName());
             }
             task.setParentId(parentTask);
-            task.setProjectId(createTask.getProjectId());
             task.setProjectId(createTask.getProjectId());
             task.setStatus("Y");
             task.setStartDate(ProjectManagerUtility.str2Date(createTask.getStartDate()));
@@ -96,8 +85,6 @@ public class TaskServiceImpl implements TaskService{
             viewParentTaskList.add(viewParentTask);
         }
         return viewParentTaskList;
-        //List<com.project.manager.bean.response.ViewParentTask> parentTask = new ArrayList<>();
-      //  return false;
     }
 
     @Override
@@ -108,15 +95,28 @@ public class TaskServiceImpl implements TaskService{
         for(Task task: parentTaskList){
             viewTask = new ViewTask();
             viewTask.setParentTaskId(task.getParentId().getId());
-            viewTask.setParentTaskName(task.getParentId().getParentTask());
+            viewTask.setParentTaskName(task.getParentId().getParentTask()==null ? "This task has no parent task" :
+                    task.getParentId().getParentTask());
             viewTask.setProjectId(task.getProjectId());
             viewTask.setTaskName(task.getTask());
             viewTask.setPriority(task.getPriority());
             viewTask.setStartDate(ProjectManagerUtility.date2String(task.getStartDate()));
             viewTask.setEndDate(ProjectManagerUtility.date2String(task.getEndDate()));
+            viewTask.setTaskId(task.getTaskId());
+            viewTask.setTaskCompleted("Y".equalsIgnoreCase(task.getIsCompleted()));
+            viewTask.setProjectName(task.getProject().getProjectName());
+            viewTask.setUserId(task.getUserId());
             viewTaskList.add(viewTask);
         }
         return viewTaskList;
+    }
+
+    public void setTaskRepository(TaskRepository taskRepository){
+        this.taskRepository = taskRepository;
+    }
+
+    public void setParentTaskRepository(ParentTaskRepository parentTaskRepository){
+        this.parentTaskRepository = parentTaskRepository;
     }
 }
 

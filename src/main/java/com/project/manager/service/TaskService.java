@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface TaskService {
     public boolean updateTask(AddTask task);
-    public List<ViewTask> getAllTask();
     public boolean completeTask(String taskId);
     public boolean createParentTask(AddTask task);
     List<ViewParentTask> getAllParentTask();

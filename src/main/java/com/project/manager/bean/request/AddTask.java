@@ -16,4 +16,6 @@ public class AddTask {
     private String startDate;
     private String endDate;
     private String userId;
+    private String parentId;
+    private String taskId;
 }

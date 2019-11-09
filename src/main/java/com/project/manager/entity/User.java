@@ -7,10 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-@Entity @Getter @Setter @NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Entity @Getter @Setter
 public class User implements Serializable {
     @Id
     private int userId;

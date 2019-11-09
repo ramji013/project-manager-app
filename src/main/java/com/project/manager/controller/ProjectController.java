@@ -54,4 +54,8 @@ public class ProjectController {
         else
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    public void setProjectService(ProjectService projectService){
+        this.projectService = projectService;
+    }
 }

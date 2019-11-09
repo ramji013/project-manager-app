@@ -1,7 +1,6 @@
 package com.project.manager.service.impl;
 
 import com.project.manager.bean.request.AddUser;
-import com.project.manager.bean.response.ViewUser;
 import com.project.manager.entity.User;
 import com.project.manager.repository.UserRepository;
 import com.project.manager.service.UserService;
@@ -34,7 +33,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean updateUser(AddUser user) {
         User userData = userRepository.getUserByEmployeeId(user.getEmployeeId());
-        if(userData!=null) {
+        if (userData != null) {
             userData.setFirstName(user.getFirstName());
             userData.setLastName(user.getLastName());
             userRepository.save(userData);
@@ -56,6 +55,9 @@ public class UserServiceImpl implements UserService {
         }catch (Exception exp){
             return false;
         }
+    }
 
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 }

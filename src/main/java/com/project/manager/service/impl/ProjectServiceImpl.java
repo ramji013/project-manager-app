@@ -90,4 +90,8 @@ public class ProjectServiceImpl implements ProjectService {
         }
         return false;
     }
+
+    public void setProjectRepository(ProjectRepository projectRepository){
+        this.projectRepository = projectRepository;
+    }
 }

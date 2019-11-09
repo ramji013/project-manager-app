@@ -25,12 +25,20 @@ public class TaskController {
     public ResponseEntity createTask(@RequestBody AddTask createTask){
         boolean isTaskCreated = taskService.createParentTask(createTask);
         if(isTaskCreated)
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        else
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    @PutMapping
+    public ResponseEntity updateTask(@RequestBody AddTask updateTask){
+        boolean isTaskUpdated = taskService.updateTask(updateTask);
+        if(isTaskUpdated)
+            return new ResponseEntity(HttpStatus.CREATED);
         else
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-
+    @CrossOrigin(origins = "*")
     @GetMapping(path="/parent")
     public ResponseEntity getAllParentTask(){
         List<ViewParentTask> parentTask = taskService.getAllParentTask();
@@ -40,6 +48,7 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @CrossOrigin(origins = "*")
     @GetMapping
     public ResponseEntity getTaskByProjectId(@RequestParam(value="projectId", required = true) String projectId){
         List<ViewTask> parentTask = taskService.getTaskByProjectId(projectId);
@@ -47,5 +56,19 @@ public class TaskController {
             return new ResponseEntity<>(parentTask,HttpStatus.OK);
         else
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @CrossOrigin(origins = "*")
+    @PutMapping(path = "/completetask")
+    public ResponseEntity completeTask(@RequestParam String taskId){
+        boolean isTaskCompleted = taskService.completeTask(taskId);
+        if(isTaskCompleted)
+            return new ResponseEntity(HttpStatus.CREATED);
+        else
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public void setTaskService(TaskService taskService){
+        this.taskService = taskService;
     }
 }
