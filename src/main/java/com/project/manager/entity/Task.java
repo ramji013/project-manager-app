@@ -11,7 +11,9 @@ import java.util.Date;
 @Entity @Getter @Setter @NoArgsConstructor
 public class Task implements Serializable {
     @Id
+   // @GeneratedValue(strategy = GenerationType.AUTO)
     private int taskId;
+
     @ManyToOne
     @JoinColumn(name= "parent_id", referencedColumnName = "id")
     private ParentTask parentId;

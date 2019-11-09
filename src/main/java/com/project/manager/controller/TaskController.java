@@ -23,7 +23,7 @@ public class TaskController {
 
     @PostMapping
     public ResponseEntity createTask(@RequestBody AddTask createTask){
-        boolean isTaskCreated = taskService.createParentTask(createTask);
+        boolean isTaskCreated = taskService.createTask(createTask);
         if(isTaskCreated)
             return new ResponseEntity<>(HttpStatus.CREATED);
         else
@@ -38,7 +38,6 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping(path="/parent")
     public ResponseEntity getAllParentTask(){
         List<ViewParentTask> parentTask = taskService.getAllParentTask();
@@ -48,7 +47,6 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @CrossOrigin(origins = "*")
     @GetMapping
     public ResponseEntity getTaskByProjectId(@RequestParam(value="projectId", required = true) String projectId){
         List<ViewTask> parentTask = taskService.getTaskByProjectId(projectId);
@@ -58,7 +56,6 @@ public class TaskController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
-    @CrossOrigin(origins = "*")
     @PutMapping(path = "/completetask")
     public ResponseEntity completeTask(@RequestParam String taskId){
         boolean isTaskCompleted = taskService.completeTask(taskId);

@@ -33,14 +33,14 @@ public class TestTaskController {
 
     @Test
     public void testCreateTask(){
-        when(taskService.createParentTask(any())).thenReturn(true);
+        when(taskService.createTask(any())).thenReturn(true);
         responseEntity = taskController.createTask(any());
         Assert.assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
     }
 
     @Test
     public void testCreateTaskFailed(){
-        when(taskService.createParentTask(any())).thenReturn(false);
+        when(taskService.createTask(any())).thenReturn(false);
         responseEntity = taskController.createTask(any());
         Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
     }

@@ -48,24 +48,26 @@ public class TaskServiceImpl implements TaskService{
     }
 
     @Override
-    public boolean createParentTask(AddTask createTask) {
+    public boolean createTask(AddTask createTask) {
         try {
-            ParentTask parentTask = new ParentTask();
-            Task task = new Task();
-            if (createTask.isParentTask()){
-               parentTask.setParentTask(createTask.getTaskName());
+            if(createTask.isParentTask()){
+                ParentTask parentTask = new ParentTask();
+                parentTask.setParentTask(createTask.getTaskName());
+                parentTaskRepository.save(parentTask);
             }else {
+                ParentTask parentTask = parentTaskRepository.getOne(createTask.getParentTaskId());
+                Task task = new Task();
                 task.setTask(createTask.getTaskName());
+                task.setParentId(parentTask);
+                task.setProjectId(createTask.getProjectId());
+                task.setStatus("Y");
+                task.setStartDate(ProjectManagerUtility.str2Date(createTask.getStartDate()));
+                task.setEndDate(ProjectManagerUtility.str2Date(createTask.getEndDate()));
+                task.setPriority(createTask.getPriority());
+                task.setUserId(createTask.getUserId());
+                //parentTask.setTaskDetail(Arrays.asList(task));
+                taskRepository.save(task);
             }
-            task.setParentId(parentTask);
-            task.setProjectId(createTask.getProjectId());
-            task.setStatus("Y");
-            task.setStartDate(ProjectManagerUtility.str2Date(createTask.getStartDate()));
-            task.setEndDate(ProjectManagerUtility.str2Date(createTask.getEndDate()));
-            task.setPriority(createTask.getPriority());
-            task.setUserId(createTask.getUserId());
-            parentTask.setTaskDetail(Arrays.asList(task));
-            parentTaskRepository.save(parentTask);
             return true;
         }catch(Exception exp) {
             exp.printStackTrace();

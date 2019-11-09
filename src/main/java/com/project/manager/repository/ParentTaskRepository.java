@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import javax.transaction.Transactional;
 
 @Transactional
-public interface ParentTaskRepository extends JpaRepository<ParentTask, String> {
+public interface ParentTaskRepository extends JpaRepository<ParentTask, Integer> {
 
 }

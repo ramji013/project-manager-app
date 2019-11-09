@@ -42,17 +42,17 @@ public class TestTaskServiceImpl {
 
     @Test
     public void testCreateParentTask(){
-        Assert.assertTrue(taskService.createParentTask(getTaskFromReq(true)));
+        Assert.assertTrue(taskService.createTask(getTaskFromReq(true)));
     }
 
     @Test
     public void testCreateParentTaskFailed(){
-        Assert.assertFalse(taskService.createParentTask(null));
+        Assert.assertFalse(taskService.createTask(null));
     }
 
     @Test
     public void testCreateChildTask(){
-        Assert.assertTrue(taskService.createParentTask(getTaskFromReq(false)));
+        Assert.assertTrue(taskService.createTask(getTaskFromReq(false)));
     }
 
     public AddTask getTaskFromReq(boolean isParent){
@@ -60,14 +60,13 @@ public class TestTaskServiceImpl {
         addTask.setEndDate("2019-01-01");
         addTask.setParentTask(isParent);
         addTask.setPriority("1");
-        addTask.setParentTaskId("1");
+        addTask.setParentTaskId(1);
         addTask.setProjectId("1");
         addTask.setProjectName("Test");
         addTask.setStartDate("2019-01-01");
         addTask.setTaskName("Hello");
-        addTask.setUserId("23232132");
+        addTask.setUserId("123");
         addTask.setProjectName("123");
-        addTask.setParentTaskId("234");
         return addTask;
     }
 
