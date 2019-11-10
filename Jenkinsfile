@@ -1,26 +1,24 @@
 pipeline {
     agent any
 
+    tools {
+           maven 'Maven_3.5.2'
+    }
+
     stages{
         stage('Compile'){
             steps{
-                withMaven(maven: 'maven_home'){
-                  sh 'mvn clean compile'
-                }
+                  bat 'mvn clean compile'
             }
         }
         stage('Unit Testing'){
             steps{
-                withMaven(maven: 'maven_home'){
-                  sh 'mvn test'
-                }
+                  bat 'mvn test'
             }
         }
         stage('Deploy App'){
             steps{
-                withMaven(maven: 'maven_home'){
-                  sh 'mvn deploy'
-                }
+                  bat 'mvn deploy'
            }
         }
     }
