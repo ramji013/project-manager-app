@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AddTask {
-    private String projectName;
+   // private String projectName;
     private String projectId;
     private String taskName;
     @JsonProperty("isParentTask")
@@ -18,6 +18,6 @@ public class AddTask {
     private String startDate;
     private String endDate;
     private String userId;
-    private String parentId;
+  //  private String parentId;
     private String taskId;
 }

@@ -9,16 +9,18 @@ import com.project.manager.repository.ParentTaskRepository;
 import com.project.manager.repository.TaskRepository;
 import com.project.manager.service.TaskService;
 import com.project.manager.util.ProjectManagerUtility;
-import javafx.scene.Parent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class TaskServiceImpl implements TaskService{
+
+    private static final Logger logger = LoggerFactory.getLogger(TaskServiceImpl.class);
 
     @Autowired
     private ParentTaskRepository parentTaskRepository;
@@ -30,13 +32,15 @@ public class TaskServiceImpl implements TaskService{
     public boolean updateTask(AddTask updateTask) {
 
         Task task = taskRepository.findByTaskId(updateTask.getTaskId());
-        task.setParentId(task.getParentId());
-        task.setProjectId(updateTask.getProjectId());
-        task.setStartDate(ProjectManagerUtility.str2Date(updateTask.getStartDate()));
-        task.setEndDate(ProjectManagerUtility.str2Date(updateTask.getEndDate()));
-        task.setPriority(updateTask.getPriority());
-        task.setUserId(updateTask.getUserId());
-        taskRepository.save(task);
+        if(task!=null) {
+            task.setParentId(task.getParentId());
+            task.setProjectId(updateTask.getProjectId());
+            task.setStartDate(ProjectManagerUtility.str2Date(updateTask.getStartDate()));
+            task.setEndDate(ProjectManagerUtility.str2Date(updateTask.getEndDate()));
+            task.setPriority(updateTask.getPriority());
+            task.setUserId(updateTask.getUserId());
+            taskRepository.save(task);
+        }
         return true;
     }
 
@@ -70,7 +74,7 @@ public class TaskServiceImpl implements TaskService{
             }
             return true;
         }catch(Exception exp) {
-            exp.printStackTrace();
+            logger.error("Exception occured while creating task: ", exp);
             return false;
         }
     }

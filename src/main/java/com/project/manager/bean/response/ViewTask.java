@@ -15,6 +15,6 @@ public class ViewTask {
     private String endDate;
     private String userId;
     private int taskId;
-    private boolean isTaskCompleted;
+    private boolean taskCompleted;
 
 }

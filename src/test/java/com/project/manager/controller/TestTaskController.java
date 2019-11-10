@@ -46,6 +46,20 @@ public class TestTaskController {
     }
 
     @Test
+    public void testUpdatesTaskSucces(){
+        when(taskService.updateTask(any())).thenReturn(true);
+        responseEntity = taskController.updateTask(any());
+        Assert.assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
+    }
+
+    @Test
+    public void testUpdatesTaskFailure(){
+        when(taskService.updateTask(any())).thenReturn(false);
+        responseEntity = taskController.updateTask(any());
+        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+    }
+
+    @Test
     public void testgetAllParentTask(){
         when(taskService.getAllParentTask()).thenReturn(getParentTask());
         responseEntity = taskController.getAllParentTask();
@@ -67,6 +81,18 @@ public class TestTaskController {
         when(taskService.getTaskByProjectId(any())).thenReturn(getTask());
         responseEntity = taskController.getTaskByProjectId(any());
         Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+        List<ViewTask> viewTasks = (List<ViewTask>)responseEntity.getBody();
+        Assert.assertEquals("EndDate not matching","2019-01-01",viewTasks.get(0).getEndDate());
+        Assert.assertEquals("StartDate not matching","2019-01-01",viewTasks.get(0).getStartDate());
+        Assert.assertEquals("Priority not matching", "1", viewTasks.get(0).getPriority());
+        Assert.assertEquals("Task name not matching", "123", viewTasks.get(0).getTaskName());
+        Assert.assertEquals("Task completed flag not matching", true, viewTasks.get(0).isTaskCompleted());
+        Assert.assertEquals("Parent Name not matching", "12321", viewTasks.get(0).getParentTaskName());
+        Assert.assertEquals("ParentTask Id not matching", 1, viewTasks.get(0).getParentTaskId());
+        Assert.assertEquals("Project id not matching", "12", viewTasks.get(0).getProjectId());
+        Assert.assertEquals("Project name not matching", "1232", viewTasks.get(0).getProjectName());
+        Assert.assertEquals("User id not matching", "123", viewTasks.get(0).getUserId());
+        Assert.assertEquals("Task id not matching", 123, viewTasks.get(0).getTaskId());
     }
 
     @Test
@@ -100,8 +126,8 @@ public class TestTaskController {
     public List<ViewTask> getTask(){
         ViewTask viewTask = new ViewTask();
         viewTask.setTaskCompleted(true);
-        viewTask.setEndDate("1232");
-        viewTask.setStartDate("12321");
+        viewTask.setEndDate("2019-01-01");
+        viewTask.setStartDate("2019-01-01");
         viewTask.setPriority("1");
         viewTask.setTaskName("123");
         viewTask.setTaskCompleted(true);
@@ -110,6 +136,7 @@ public class TestTaskController {
         viewTask.setProjectId("12");
         viewTask.setProjectName("1232");
         viewTask.setUserId("123");
+        viewTask.setTaskId(123);
         return Arrays.asList(viewTask);
     }
 }

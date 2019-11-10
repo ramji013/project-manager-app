@@ -7,6 +7,8 @@ import com.project.manager.entity.Task;
 import com.project.manager.repository.ProjectRepository;
 import com.project.manager.service.ProjectService;
 import com.project.manager.util.ProjectManagerUtility;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.List;
 
 @Service
 public class ProjectServiceImpl implements ProjectService {
+
+    private static final Logger logger = LoggerFactory.getLogger(ProjectServiceImpl.class);
 
     @Autowired
     private ProjectRepository projectRepository;
@@ -32,7 +36,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.save(project);
             return true;
         }catch(Exception exp){
-            exp.printStackTrace();
+            logger.error("Exception occured while creating project: ", exp);
         }
         return false;
     }
@@ -86,7 +90,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectRepository.suspendProject(projectId);
             return true;
         }catch (Exception exp){
-            exp.printStackTrace();
+            logger.error("Exception occured while suspending project: ", exp);
         }
         return false;
     }

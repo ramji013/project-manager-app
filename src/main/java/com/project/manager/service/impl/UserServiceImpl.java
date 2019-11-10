@@ -4,6 +4,8 @@ import com.project.manager.bean.request.AddUser;
 import com.project.manager.entity.User;
 import com.project.manager.repository.UserRepository;
 import com.project.manager.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,8 +14,10 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+
     @Autowired
-    private UserRepository userRepository;
+    public UserRepository userRepository;
 
     @Override
     public boolean createUser(AddUser user) {
@@ -25,7 +29,7 @@ public class UserServiceImpl implements UserService {
             userRepository.save(userBean);
             return true;
         }catch (Exception exp){
-            exp.printStackTrace();
+            logger.error("Exception occured while creating user: ", exp);
         }
         return false;
     }
@@ -53,6 +57,7 @@ public class UserServiceImpl implements UserService {
             userRepository.deleteEmployee(employeeId);
             return true;
         }catch (Exception exp){
+            logger.error("Exception occured while deleting user: ", exp);
             return false;
         }
     }

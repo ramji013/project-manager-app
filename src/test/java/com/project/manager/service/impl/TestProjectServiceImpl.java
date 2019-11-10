@@ -39,6 +39,12 @@ public class TestProjectServiceImpl {
     }
 
     @Test
+    public void testUpdateProjectFailure(){
+        when(projectRepository.getProjectById(any(Integer.class))).thenReturn(null);
+        Assert.assertFalse(projectService.updateProject(getProjectFromReq()));
+    }
+
+    @Test
     public void testGetAllProject(){
         when(projectRepository.getAllActiveProject()).thenReturn(Arrays.asList(getProjectFromDB()));
         Assert.assertNotNull(projectService.getAllProject());

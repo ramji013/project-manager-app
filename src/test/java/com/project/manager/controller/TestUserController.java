@@ -59,7 +59,13 @@ public class TestUserController {
     public void testGetAllUser(){
         when(userService.getAllUser()).thenReturn(getUser());
         responseEntity = userController.getUser();
+        List<User> users = (List<User>) responseEntity.getBody();
         Assert.assertEquals(200, responseEntity.getStatusCode().value());
+        Assert.assertEquals("Employee ID not matching", "123", users.get(0).getEmployeeId());
+        Assert.assertEquals("FirstName not matching", "firstname", users.get(0).getFirstName());
+        Assert.assertEquals("LastName not matching", "lastName", users.get(0).getLastName());
+        Assert.assertEquals("Active user not matching", "Y", users.get(0).getIsActive());
+        Assert.assertEquals("UserId not matching", 1, users.get(0).getUserId());
     }
 
     @Test

@@ -2,6 +2,7 @@ package com.project.manager.service.impl;
 
 import com.project.manager.bean.request.AddTask;
 import com.project.manager.entity.ParentTask;
+import com.project.manager.entity.Project;
 import com.project.manager.entity.Task;
 import com.project.manager.repository.ParentTaskRepository;
 import com.project.manager.repository.TaskRepository;
@@ -62,11 +63,11 @@ public class TestTaskServiceImpl {
         addTask.setPriority("1");
         addTask.setParentTaskId(1);
         addTask.setProjectId("1");
-        addTask.setProjectName("Test");
+        //addTask.setProjectName("Test");
         addTask.setStartDate("2019-01-01");
         addTask.setTaskName("Hello");
         addTask.setUserId("123");
-        addTask.setProjectName("123");
+       // addTask.setParentId("123");
         return addTask;
     }
 
@@ -80,6 +81,12 @@ public class TestTaskServiceImpl {
     public void testTaskByProjectId(){
         when(taskRepository.findByProjectId(any())).thenReturn(getTask());
         Assert.assertTrue(taskService.getTaskByProjectId("").size()>0);
+    }
+
+    @Test
+    public void testUpdateTask(){
+        when(taskRepository.findByTaskId(any())).thenReturn(getTask().get(0));
+        Assert.assertTrue(taskService.updateTask(getTaskFromReq(true)));
     }
 
     public ParentTask getParentTaskFromDB(){
@@ -104,6 +111,15 @@ public class TestTaskServiceImpl {
         task.setEndDate(new Date());
         task.setIsCompleted("Y");
         task.setParentId(getParentTask());
+        Project project = new Project();
+        project.setProjectName("This is the project");
+        project.setIsActive("Y");
+        project.setManagerId(1232);
+        project.setStartDate(new Date());
+        project.setEndDate(new Date());
+        project.setPriority(1);
+        project.setProjectId("1");
+        task.setProject(project);
         return Arrays.asList(task);
     }
 
