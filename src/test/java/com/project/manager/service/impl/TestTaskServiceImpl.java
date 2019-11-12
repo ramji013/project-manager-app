@@ -89,6 +89,12 @@ public class TestTaskServiceImpl {
         Assert.assertTrue(taskService.updateTask(getTaskFromReq(true)));
     }
 
+    @Test
+    public void testDeleteTask(){
+        doNothing().when(taskRepository).deleteTask(any());
+        Assert.assertTrue(taskService.deleteTask(any()));
+    }
+
     public ParentTask getParentTaskFromDB(){
         ParentTask parentTask = getParentTask();
         parentTask.setTaskDetail(getTask());

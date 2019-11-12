@@ -5,30 +5,15 @@ import com.project.manager.service.ProjectService;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.mockito.Mockito.*;
 
-//@RunWith(SpringJUnit4ClassRunner.class)
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
 public class TestProjectController {
 
     ProjectService projectService;
@@ -41,27 +26,6 @@ public class TestProjectController {
         projectController = spy(ProjectController.class);
         projectController.setProjectService(projectService);
     }
-
-//    private MockMvc mockMvc;
-//
-//    @Before
-//    public void init(){
-//        this.mockMvc = MockMvcBuilders.standaloneSetup(projectController).build();
-//    }
-
-//    @Test
-//    public void testCreateProjectSuccessIntegration() throws Exception{
-//        mockMvc.perform(MockMvcRequestBuilders.post("/project/")
-//                .contentType(MediaType.APPLICATION_JSON).content("{\"projectId\" : 1, \"projectName\" : \"First Project\", \"startDate\": \"2019-01-01\", \"endDate\": \"2019-02-10\", \"priority\": 10, \"managerId\" : \"1234\"}").accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isCreated());
-//    }
-
-//    @Test
-//    public void testCreateProjectFailure() throws Exception{
-//        mockMvc.perform(MockMvcRequestBuilders.post("/project/")
-//                .contentType(MediaType.APPLICATION_JSON).content("").accept(MediaType.APPLICATION_JSON))
-//                .andExpect(status().isInternalServerError());
-//    }
 
     @Test
     public void testCreateProjectSuccess(){

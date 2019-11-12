@@ -116,6 +116,20 @@ public class TestTaskController {
         Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
     }
 
+    @Test
+    public void testDeleteTaskSuccess(){
+        when(taskService.deleteTask(any())).thenReturn(true);
+        responseEntity = taskController.deleteTask(any());
+        Assert.assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+    }
+
+    @Test
+    public void testDeleteTaskFailure(){
+        when(taskService.deleteTask(any())).thenReturn(false);
+        responseEntity = taskController.deleteTask(any());
+        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+    }
+
     public List<ViewParentTask> getParentTask(){
         ViewParentTask viewParentTask = new ViewParentTask();
         viewParentTask.setTask("12");

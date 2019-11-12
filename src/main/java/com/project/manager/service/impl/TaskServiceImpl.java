@@ -117,6 +117,17 @@ public class TaskServiceImpl implements TaskService{
         return viewTaskList;
     }
 
+    @Override
+    public boolean deleteTask(String taskId) {
+        try {
+            taskRepository.deleteTask(taskId);
+            return true;
+        }catch (Exception exp){
+            logger.error("Exception occured while deleting task: ", exp);
+        }
+        return false;
+    }
+
     public void setTaskRepository(TaskRepository taskRepository){
         this.taskRepository = taskRepository;
     }
@@ -124,5 +135,7 @@ public class TaskServiceImpl implements TaskService{
     public void setParentTaskRepository(ParentTaskRepository parentTaskRepository){
         this.parentTaskRepository = parentTaskRepository;
     }
+
+
 }
 

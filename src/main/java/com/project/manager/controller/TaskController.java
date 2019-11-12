@@ -65,6 +65,15 @@ public class TaskController {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
+    @DeleteMapping
+    public ResponseEntity deleteTask(@RequestParam String taskId){
+        boolean isTaskDeleted = taskService.deleteTask(taskId);
+        if(isTaskDeleted)
+            return new ResponseEntity((HttpStatus.OK));
+        else
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
     public void setTaskService(TaskService taskService){
         this.taskService = taskService;
     }

@@ -13,4 +13,6 @@ public interface TaskService {
     List<ViewParentTask> getAllParentTask();
 
     List<ViewTask> getTaskByProjectId(String projectId);
+
+    boolean deleteTask(String taskId);
 }
